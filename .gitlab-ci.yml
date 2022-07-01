@@ -1,0 +1,59 @@
+variables:
+  PROJECT_FOLDER: ""
+  SERVICE_NAME: "uwsgi"
+
+stages:
+  - tests
+  - pull-dev
+  - pull-master
+
+pull-master:
+  stage: pull-master
+  image: kroniak/ssh-client:3.6
+  script:
+    - mkdir ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - ssh -p $SSH_PORT ubuntu@$PRODUCTION_SERVER "cd $PROJECT_FOLDER/ && git pull origin master"
+    - ssh -p $SSH_PORT ubuntu@$PRODUCTION_SERVER "source $PROJECT_FOLDER/venv/bin/activate && pip install -r $PROJECT_FOLDER/requirements/requirements.txt"
+    - ssh -p $SSH_PORT ubuntu@$PRODUCTION_SERVER "source $PROJECT_FOLDER/venv/bin/activate && python $PROJECT_FOLDER/manage.py migrate"
+    - ssh -p $SSH_PORT ubuntu@$PRODUCTION_SERVER "source $PROJECT_FOLDER/venv/bin/activate && python $PROJECT_FOLDER/manage.py collectstatic --noinput"
+    - ssh -p $SSH_PORT ubuntu@$PRODUCTION_SERVER "sudo service $SERVICE_NAME restart"
+    - ssh -p $SSH_PORT ubuntu@$PRODUCTION_SERVER "sudo service nginx restart"
+  only:
+    - master
+  when: on_success
+
+
+pull-dev:
+  stage: pull-dev
+  image: kroniak/ssh-client:3.6
+  script:
+    - mkdir ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - ssh -p $SSH_PORT ubuntu@$TEST_SERVER "cd $PROJECT_FOLDER/ && git pull origin master"
+    - ssh -p $SSH_PORT ubuntu@$TEST_SERVER "source $PROJECT_FOLDER/venv/bin/activate && pip install -r $PROJECT_FOLDER/requirements/requirements.txt"
+    - ssh -p $SSH_PORT ubuntu@$TEST_SERVER "source $PROJECT_FOLDER/venv/bin/activate && python $PROJECT_FOLDER/manage.py migrate"
+    - ssh -p $SSH_PORT ubuntu@$TEST_SERVER "source $PROJECT_FOLDER/venv/bin/activate && python $PROJECT_FOLDER/manage.py collectstatic --noinput"
+    - ssh -p $SSH_PORT ubuntu@$TEST_SERVER "sudo service $SERVICE_NAME restart"
+    - ssh -p $SSH_PORT ubuntu@$TEST_SERVER "sudo service nginx restart"
+  only:
+    - dev
+  when: on_success
+
+units-test:
+  stage: tests
+  image: python:3.9
+  script:
+
+    - pipenv install --system
+    - python -m  pytest --conv-report=html --cov=src
+  artifacts:
+    paths:
+      - coverage
+    expire_in: 30 days
