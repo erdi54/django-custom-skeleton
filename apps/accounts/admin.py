@@ -5,7 +5,6 @@ from django.contrib.auth.admin import UserAdmin
 User = get_user_model()
 
 
-@admin.register(User)
 class UserAdminCustom(UserAdmin):
     model = User
     fieldsets = (
@@ -43,7 +42,7 @@ class UserAdminCustom(UserAdmin):
         ('İzinler', {'fields': ('groups', 'api_permissions')}),
 
         ('Kişisel', {
-            'fields': ('first_name', 'last_name', ),
+            'fields': ('first_name', 'last_name',),
         }),
         ('İletişim', {
             'fields': ('phone', 'email'),
@@ -61,3 +60,7 @@ class UserAdminCustom(UserAdmin):
     readonly_fields = ('created_at', 'updated_at')
     exclude = ('password_reset_token', 'invite_token', 'username',)
     ordering = ('-created_at',)
+
+
+admin.site.unregister(User)
+admin.site.register(User, UserAdminCustom)
