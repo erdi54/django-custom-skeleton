@@ -50,7 +50,7 @@ DJANGO_PACKAGES = [
     'django_celery_beat',
     'rest_framework',
     'django_filters',
-    'django_extensions'
+    'django_extensions',
     'rest_framework.authtoken',
     'waffle',
     'drf_yasg',
