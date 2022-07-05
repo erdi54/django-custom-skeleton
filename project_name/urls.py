@@ -8,6 +8,7 @@ from django.conf import settings
 from django.urls import path, include, re_path
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from api import urls
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -31,6 +32,7 @@ urlpatterns = [  # provide the most basic login/logout functionality
                   path('logout/$', auth_views.LogoutView.as_view(), name='core_logout'),
                   # enable the admin interface
                   path('admin/', admin.site.urls),
+                  path('api/', include(urls)),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += [
