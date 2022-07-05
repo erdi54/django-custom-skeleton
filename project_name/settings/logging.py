@@ -12,23 +12,23 @@ LOGGING = {
     'handlers': {
         'debug_handler': {
             'level': 'DEBUG',
-            'class': 'apps.monitoring.db_log_handler.DatabaseLogHandler',
+            'class': '{{ project_name }}.apps.monitoring.db_log_handler.DatabaseLogHandler',
             'formatter': 'simple'
         },
 
         'error_handler': {
             'level': 'ERROR',
-            'class': 'apps.monitoring.db_log_handler.DatabaseLogHandler',
+            'class': '{{ project_name }}.apps.monitoring.db_log_handler.DatabaseLogHandler',
             'formatter': 'simple'
         },
         'fatal_handler': {
             'level': 'FATAL',
-            'class': '.apps.monitoring.db_log_handler.DatabaseLogHandler',
+            'class': '{{ project_name }}.apps.monitoring.db_log_handler.DatabaseLogHandler',
             'formatter': 'simple'
         },
         'info_handler': {
             'level': 'INFO',
-            'class': 'apps.monitoring.db_log_handler.DatabaseLogHandler',
+            'class': '{{ project_name }}.apps.monitoring.db_log_handler.DatabaseLogHandler',
             'formatter': 'simple'
         }
 
