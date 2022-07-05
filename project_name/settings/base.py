@@ -48,7 +48,6 @@ DJANGO_DEFAULTS = [
 DJANGO_PACKAGES = [
     'django_celery_results',
     'django_celery_beat',
-    'django_filters',
     'rest_framework',
     'django_filters',
     'django_extensions'
