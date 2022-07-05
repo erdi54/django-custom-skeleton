@@ -15,20 +15,20 @@ PROJECT_ROOT = dirname(DJANGO_ROOT)
 SITE_NAME = basename(DJANGO_ROOT)
 
 # collect static files here
-STATIC_ROOT = join(PROJECT_ROOT, 'static')
+STATIC_ROOT = join(PROJECT_ROOT, 'run', 'static')
 
 # collect media files here
-MEDIA_ROOT = join(PROJECT_ROOT, 'media')
+MEDIA_ROOT = join(PROJECT_ROOT, 'run', 'media')
 
 # look for static assets here
 STATICFILES_DIRS = [
-    join(PROJECT_ROOT, 'static'),
+    join(PROJECT_ROOT, 'run', 'static'),
 ]
 
 # look for templates here
 # This is an internal setting, used in the TEMPLATES directive
 PROJECT_TEMPLATES = [
-    join(PROJECT_ROOT, 'templates'),
+    join(PROJECT_ROOT, 'run', 'templates'),
 ]
 
 # add apps/ to the Python path
