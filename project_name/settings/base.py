@@ -15,10 +15,10 @@ PROJECT_ROOT = dirname(DJANGO_ROOT)
 SITE_NAME = basename(DJANGO_ROOT)
 
 # collect static files here
-STATIC_ROOT = join(PROJECT_ROOT, 'run', 'static')
+STATIC_ROOT = join(PROJECT_ROOT, 'static')
 
 # collect media files here
-MEDIA_ROOT = join(PROJECT_ROOT, 'run', 'media')
+MEDIA_ROOT = join(PROJECT_ROOT, 'media')
 
 # look for static assets here
 STATICFILES_DIRS = [
@@ -161,6 +161,7 @@ except IOError:
 
         chars = 'abcdefghijklmnopqrstuvwxyz0123456789!$%&()=+-_'
         SECRET_KEY = get_random_string(50, chars)
+
         with open(SECRET_FILE, 'w') as f:
             f.write(SECRET_KEY)
     except IOError:
