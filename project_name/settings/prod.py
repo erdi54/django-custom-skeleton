@@ -1,5 +1,6 @@
 # for now fetch the development settings only
 from .dev import *
+from .logging import *
 
 # turn off all debugging
 DEBUG = False

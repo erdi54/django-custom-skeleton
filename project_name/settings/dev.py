@@ -2,10 +2,23 @@
 from os.path import join
 
 # project imports
-from .base import PROJECT_ROOT, DEFAULT_APPS
+
+try:
+    from .base import *
+except ImportError:
+    pass
+
+try:
+    from .logging import *
+except ImportError:
+    pass
+
+try:
+    from .i18n import *
+except ImportError:
+    pass
 
 # uncomment the following line to include i18n
-# from .i18n import *
 
 
 # ##### DEBUG CONFIGURATION ###############################
@@ -23,8 +36,8 @@ LOGOUT_REDIRECT_URL = 'core_login'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': PROJECT_ROOT,
-        'USER': 'streamtotext',
+        'NAME': '{{ project_name }}',
+        'USER': '{{ project_name }}',
         'PASSWORD': '123456',
         'HOST': 'postgres',
         'PORT': '5432',

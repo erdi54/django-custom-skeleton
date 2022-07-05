@@ -3,7 +3,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s %(user)s'
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s %(accounts)s'
         },
         'simple': {
             'format': '%(levelname)s %(asctime)s %(message)s '
@@ -12,23 +12,23 @@ LOGGING = {
     'handlers': {
         'debug_handler': {
             'level': 'DEBUG',
-            'class': '{{ project_name }}.apps.monitoring.db_log_handler.DatabaseLogHandler',
+            'class': 'apps.monitoring.db_log_handler.DatabaseLogHandler',
             'formatter': 'simple'
         },
 
         'error_handler': {
             'level': 'ERROR',
-            'class': '{{ project_name }}.apps.monitoring.db_log_handler.DatabaseLogHandler',
+            'class': 'apps.monitoring.db_log_handler.DatabaseLogHandler',
             'formatter': 'simple'
         },
         'fatal_handler': {
             'level': 'FATAL',
-            'class': '{{ project_name }}.apps.monitoring.db_log_handler.DatabaseLogHandler',
+            'class': '.apps.monitoring.db_log_handler.DatabaseLogHandler',
             'formatter': 'simple'
         },
         'info_handler': {
             'level': 'INFO',
-            'class': '{{ project_name }}.apps.monitoring.db_log_handler.DatabaseLogHandler',
+            'class': 'apps.monitoring.db_log_handler.DatabaseLogHandler',
             'formatter': 'simple'
         }
 

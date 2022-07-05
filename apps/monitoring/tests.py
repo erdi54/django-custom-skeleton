@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 import logging
 from django.contrib.admin import AdminSite
 from django.test import TestCase
-from project_name.apps.monitoring.admin import StatusLogAdmin
+from apps.monitoring.admin import StatusLogAdmin
 from .models import StatusLog
 
 

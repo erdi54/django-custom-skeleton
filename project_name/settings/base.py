@@ -1,4 +1,5 @@
 # Python imports
+from datetime import timedelta
 from os.path import abspath, basename, dirname, join, normpath
 import sys
 
@@ -36,7 +37,7 @@ sys.path.append(normpath(join(PROJECT_ROOT, 'apps')))
 # ##### APPLICATION CONFIGURATION #########################
 
 # these are the apps
-DEFAULT_APPS = [
+DJANGO_DEFAULTS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +45,24 @@ DEFAULT_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+DJANGO_PACKAGES = [
+    'django_celery_results',
+    'django_celery_beat',
+    'django_filters',
+    'rest_framework',
+    'django_filters',
+    'django_extensions'
+    'rest_framework.authtoken',
+    'waffle',
+    'drf_yasg',
+]
+
+PROJECT_APPS = [
+    'apps.monitoring',
+    'apps.accounts'
+]
+
+DEFAULT_APPS = DJANGO_DEFAULTS + DJANGO_PACKAGES
 
 # Middlewares
 MIDDLEWARE = [
@@ -55,6 +74,31 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.XMLRenderer',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.XMLParser',
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+    ),
+}
 
 # template stuff
 TEMPLATES = [
