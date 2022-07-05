@@ -5,6 +5,18 @@ from .logging import *
 # turn off all debugging
 DEBUG = False
 
+# ##### DATABASE CONFIGURATION ############################
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '{{ project_name }}',
+        'USER': '{{ project_name }}',
+        'PASSWORD': '123456',
+        'HOST': 'postgres',
+        'PORT': '5432',
+    }
+}
+
 # You will have to determine, which hostnames should be served by Django
 ALLOWED_HOSTS = []
 
