@@ -20,7 +20,7 @@ class UserAdminCustom(UserAdmin):
             'fields': ('is_admin', 'is_active',),
         }),
         ('Kişisel', {
-            'fields': ('first_name', 'last_name', 'propic', 'user_type', 'user_status', 'credits'),
+            'fields': ('first_name', 'last_name',),
         }),
         ('İletişim', {
             'fields': ('phone', 'email',),
@@ -38,15 +38,15 @@ class UserAdminCustom(UserAdmin):
             'fields': ('created_at', 'updated_at',),
         }),
         ('Account Status', {
-            'fields': ('is_admin', 'is_active', 'account', 'company_person', 'user_type', 'user_status'),
+            'fields': ('is_admin', 'is_active'),
         }),
         ('İzinler', {'fields': ('groups', 'api_permissions')}),
 
         ('Kişisel', {
-            'fields': ('first_name', 'last_name', 'propic', 'user_status', 'credits'),
+            'fields': ('first_name', 'last_name', ),
         }),
         ('İletişim', {
-            'fields': ('phone', 'email', 'land_phone',),
+            'fields': ('phone', 'email'),
         }),
         ('İletişim İzinleri', {
             'fields': ('email_notification', 'mobile_notification', 'sms_notification',),
@@ -54,9 +54,9 @@ class UserAdminCustom(UserAdmin):
 
     )
     search_fields = ('is_admin', 'email', 'phone', 'first_name', 'last_name',)
-    list_display = ['id', 'first_name', 'last_name', 'email', 'is_active', 'user_type', 'user_status', 'credits']
+    list_display = ['id', 'first_name', 'last_name', 'email', 'is_active']
     list_display_links = ('id',)
-    list_filter = ('is_admin', 'api_permissions', 'created_at', 'user_type', 'deleted', 'is_active',)
+    list_filter = ('is_admin', 'api_permissions', 'created_at', 'is_active',)
     list_editable = ('is_active',)
     readonly_fields = ('created_at', 'updated_at')
     exclude = ('password_reset_token', 'invite_token', 'username',)
