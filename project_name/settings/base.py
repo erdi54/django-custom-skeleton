@@ -121,7 +121,8 @@ TEMPLATES = [
 USE_I18N = False
 
 # ##### SECURITY CONFIGURATION ############################
-
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+AUTH_USER_MODEL = "accounts.User"
 # We store the secret key here
 # The required SECRET_KEY is fetched at the end of this file
 SECRET_FILE = normpath(join(PROJECT_ROOT, 'run', 'SECRET.key'))
