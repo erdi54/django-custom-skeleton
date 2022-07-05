@@ -25,5 +25,5 @@ class StatusLog(TimeTrackedModel):
         return self.msg
 
     class Meta:
-        ordering = ('-create_datetime',)
+        ordering = ('-created_at',)
         verbose_name_plural = verbose_name = 'Logging'
