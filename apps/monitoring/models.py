@@ -15,7 +15,7 @@ LOG_LEVELS = (
 
 
 @python_2_unicode_compatible
-class StatusLog(models.Model, TimeTrackedModel):
+class StatusLog(TimeTrackedModel):
     logger_name = models.CharField(max_length=100)
     level = models.PositiveSmallIntegerField(choices=LOG_LEVELS, default=logging.ERROR, db_index=True)
     msg = models.TextField()
