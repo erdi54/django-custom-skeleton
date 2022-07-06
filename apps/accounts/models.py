@@ -80,3 +80,10 @@ class User(AbstractBaseUser, PermissionsMixin, TimeTrackedModel):
     @property
     def is_superuser(self):
         return self.is_admin
+
+
+class BlackList(TimeTrackedModel):
+    ip_address = models.GenericIPAddressField(_("IP address"))
+
+    def __str__(self):
+        return self.ip_address
